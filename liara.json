@@ -1,0 +1,8 @@
+{
+  "app": "dibatest",
+  "port": 3000,
+  "build": {
+    "location": "iran"
+  },
+  "disks": []
+}
