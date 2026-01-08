@@ -8,6 +8,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import mongoose from "mongoose";
 import MonthlyIncomeChart from "@/components/MonthlyIncomeChart";
 
+// Force dynamic rendering since we use cookies for authentication
+export const dynamic = "force-dynamic";
+
 /**
  * Dashboard Page (Protected)
  * Requires authentication. Shows total users and total finance records.

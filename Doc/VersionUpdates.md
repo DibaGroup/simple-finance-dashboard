@@ -1,7 +1,7 @@
 # Version Updates & Journey Log
 
 **Project**: Simple Full-Stack Finance Dashboard  
-**Last Updated**: January 4, 2026  
+**Last Updated**: January 8, 2026  
 **Status**: Core Features Implemented ✅
 
 ---
@@ -441,6 +441,31 @@ NODE_ENV=development
 | Version | Date | Episode | Status |
 |---------|------|---------|--------|
 | 0.1.0 | Jan 4, 2026 | 1-10 | Complete ✅ |
+| 0.1.1 | Jan 8, 2026 | Bug Fixes | Complete ✅ |
+
+---
+
+## 🐛 Bug Fixes & Updates
+
+### **Version 0.1.1** (January 8, 2026)
+
+**Build Error Fixes**:
+1. **Dashboard Page - Static Rendering Issue**
+   - **Problem**: Route `/dashboard` couldn't be rendered statically because it used `cookies()` for authentication
+   - **Solution**: Added `export const dynamic = "force-dynamic"` to force dynamic rendering
+   - **File**: [app/dashboard/page.tsx](../app/dashboard/page.tsx)
+
+2. **Login Page - Missing Suspense Boundary**
+   - **Problem**: `useSearchParams()` hook required a Suspense boundary for static rendering
+   - **Solution**: Extracted `LoginForm` component and wrapped it with `<Suspense>` boundary
+   - **File**: [app/login/page.tsx](../app/login/page.tsx)
+
+3. **MonthlyIncomeChart - TypeScript Error**
+   - **Problem**: Recharts `Tooltip` formatter expected `value` parameter to accept `number | undefined`
+   - **Solution**: Updated formatter to handle undefined values: `(value: number | undefined) => value !== undefined ? '$${value.toLocaleString()}' : '$0'`
+   - **File**: [components/MonthlyIncomeChart.tsx](../components/MonthlyIncomeChart.tsx)
+
+**Build Status**: ✅ All errors resolved, production build successful
 
 ---
 
