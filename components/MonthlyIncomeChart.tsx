@@ -55,7 +55,9 @@ export default function MonthlyIncomeChart({ data }: MonthlyIncomeChartProps) {
             />
             <YAxis tick={{ fontSize: 12 }} />
             <Tooltip
-              formatter={(value: number) => `$${value.toLocaleString()}`}
+              formatter={(value: number | undefined) =>
+                value !== undefined ? `$${value.toLocaleString()}` : "$0"
+              }
             />
             <Legend />
             <Line
