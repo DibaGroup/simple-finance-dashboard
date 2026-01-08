@@ -48,6 +48,7 @@ interface FinanceRecord {
   month: string;
   income: number;
   expense: number;
+  debt: number;
   createdAt: string;
 }
 
@@ -243,7 +244,12 @@ export default function FinancePage() {
               )}
 
               {/* Submit Button */}
-              <Button type="submit" className="w-full" disabled={isLoading}>
+              <Button 
+                type="submit" 
+                className="w-full" 
+                disabled={isLoading}
+                onClick={() => console.log("RECORDS FROM API:", records)}
+              >
                 {isLoading ? "Saving..." : "Save Record"}
               </Button>
             </form>
@@ -256,7 +262,7 @@ export default function FinancePage() {
         <CardHeader>
           <CardTitle>Your Finance Records</CardTitle>
           <CardDescription>
-            View all your saved monthly finance data below.
+            View all your saved monthly finance data below...
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -267,7 +273,7 @@ export default function FinancePage() {
               No records yet. Add your first finance record above.
             </p>
           ) : (
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto overflow-y-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b">
@@ -275,8 +281,14 @@ export default function FinancePage() {
                     <th className="pb-2 text-right font-medium">Income</th>
                     <th className="pb-2 text-right font-medium">Expense</th>
                     <th className="pb-2 text-right font-medium">Net</th>
+                    <th className="pb-2 text-right font-medium">Debt</th>
+                    
                   </tr>
                 </thead>
+                </table>
+            <div className="overflow-x-auto max-h-[400px] overflow-y-auto">
+              
+              <table className="w-full text-sm">
                 <tbody>
                   {records.map((record) => (
                     <tr key={record.id} className="border-b last:border-0">
@@ -296,10 +308,19 @@ export default function FinancePage() {
                       >
                         ${(record.income - record.expense).toFixed(2)}
                       </td>
+                       <td className={`py-3 text-right 
+                            ${  record.debt  <= 0
+                            ? "text-green-600 dark:text-green-400"
+                            : "text-red-600 dark:text-red-400"
+                          }`}
+                       >
+
+                             {record.debt   }</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
+              </div>
             </div>
           )}
         </CardContent>

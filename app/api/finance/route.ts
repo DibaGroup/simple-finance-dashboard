@@ -34,7 +34,7 @@ export async function POST(request: Request) {
 
         if (!validationResult.success) {
             return NextResponse.json(
-                { error: "Validation failed", details: validationResult.error.errors },
+                { error: "Validation failed", details: validationResult.error.issues },
                 { status: 400 }
             );
         }
@@ -133,6 +133,7 @@ debtRecords.forEach((record) => {
                     month: record.month,
                     income: record.income,
                     expense: record.expense,
+                    debt: record.debt,
                     createdAt: record.createdAt,
                 })),
             },
